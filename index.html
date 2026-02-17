@@ -56,6 +56,18 @@ body{
     padding-left:40px;
 }
 
+.logo-menu{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:40px;
+}
+
+.logo-menu img{
+    width:120px;
+    filter:brightness(0) invert(1);
+}
+
 /* ===== CONTENIDO ===== */
 .content{
     margin-left:220px;   /* espacio del menú */
@@ -126,7 +138,9 @@ p{
 <body>
 
 <div class="sidebar">
-    <h2>KHAB</h2>
+    <div class="logo-menu">
+        <img src="logo.png" alt="Khab Logo">
+    </div>
     <a onclick="showSection('inicio')">INICIO</a>
     <a onclick="showSection('conocenos')">CONÓCENOS</a>
     <a onclick="showSection('contacto')">CONTÁCTANOS</a>
