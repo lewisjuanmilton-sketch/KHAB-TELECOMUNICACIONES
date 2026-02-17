@@ -60,11 +60,13 @@ body{
 
 /* ===== CONTENIDO ===== */
 .content{
-    margin-left:220px;
-    position:absolute;
-    top:12%;        /* mueve el texto hacia arriba */
-    left:220px;     /* respeta el espacio del menú */
-    right:0;
+    margin-left:220px;   /* espacio del menú */
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;  /* texto más arriba */
+    align-items:center;          /* centrado horizontal */
+    padding-top:80px;            /* ajusta qué tan arriba */
     text-align:center;
     animation:fadeIn 1.5s ease-in-out;
 }
@@ -114,6 +116,7 @@ body{
 
 </body>
 </html>
+
 
 
 
