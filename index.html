@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KHAB | Inicio</title>
+<title>KHAB</title>
 
 <style>
 *{
@@ -25,7 +25,7 @@ body{
     background-size:50%;
 }
 
-/* ===== MENÚ LATERAL ===== */
+/* ===== MENÚ ===== */
 .sidebar{
     position:fixed;
     left:0;
@@ -34,13 +34,11 @@ body{
     width:220px;
     background:rgba(0,0,0,0.85);
     padding-top:40px;
-    transition:0.3s;
 }
 
 .sidebar h2{
     text-align:center;
     margin-bottom:40px;
-    letter-spacing:2px;
 }
 
 .sidebar a{
@@ -48,9 +46,9 @@ body{
     padding:15px 30px;
     text-decoration:none;
     color:white;
-    transition:0.3s;
     font-weight:bold;
-    letter-spacing:1px;
+    transition:0.3s;
+    cursor:pointer;
 }
 
 .sidebar a:hover{
@@ -60,68 +58,91 @@ body{
 
 /* ===== CONTENIDO ===== */
 .content{
-    margin-left:220px;   /* espacio del menú */
+    margin-left:220px;
     height:100vh;
     display:flex;
-    flex-direction:column;
-    justify-content:flex-start;  /* texto más arriba */
-    align-items:center;          /* centrado horizontal */
-    padding-top:150px;            /* ajusta qué tan arriba */
+    justify-content:center;
+    align-items:center;
     text-align:center;
-    animation:fadeIn 1.5s ease-in-out;
+    padding:40px;
 }
 
-.content h1{
-    font-size:50px;
+/* SECCIONES */
+.section{
+    display:none;
+    max-width:600px;
+    animation:fadeIn 0.5s ease-in-out;
+}
+
+.section.active{
+    display:block;
+}
+
+h1{
+    font-size:42px;
     margin-bottom:20px;
 }
 
-.content p{
+p{
     font-size:18px;
-    max-width:600px;
-    margin:auto;
-    opacity:0.8;
+    opacity:0.85;
+    line-height:1.6;
 }
 
-/* ===== ANIMACIÓN ===== */
+/* ANIMACIÓN */
 @keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    from{opacity:0;}
+    to{opacity:1;}
 }
 </style>
-
 </head>
+
 <body>
 
 <div class="sidebar">
     <h2>KHAB</h2>
-    <a href="#">INICIO</a>
-    <a href="#">CONÓCENOS</a>
-    <a href="#">CONTÁCTANOS</a>
+    <a onclick="showSection('inicio')">INICIO</a>
+    <a onclick="showSection('conocenos')">CONÓCENOS</a>
+    <a onclick="showSection('contacto')">CONTÁCTANOS</a>
 </div>
 
 <div class="content">
-    <h1>Bienvenido a KHAB</h1>
-    <p>
-        Somos innovación, tecnología y compromiso.
-        Conectamos personas, empresas y oportunidades.
-    </p>
+
+    <div id="inicio" class="section active">
+        <h1>Bienvenido a KHAB</h1>
+        <p>
+            Conectamos personas, empresas y oportunidades.
+            Innovación y tecnología al servicio de tu crecimiento.
+        </p>
+    </div>
+
+    <div id="conocenos" class="section">
+        <h1>Conócenos</h1>
+        <p>
+            En KHAB somos una empresa enfocada en telecomunicaciones,
+            brindando soluciones modernas, confiables y eficientes.
+            Nuestro compromiso es ofrecer conectividad de calidad.
+        </p>
+    </div>
+
+    <div id="contacto" class="section">
+        <h1>Contáctanos</h1>
+        <p>
+            📞 Teléfono: 220-629-0307<br>
+            📧 Correo: khabtlc11@gmail.com<br>
+            📍 Ubicación: CDMX, Ciudad de Mexico
+        </p>
+    </div>
+
 </div>
+
+<script>
+function showSection(id){
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => section.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+</script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
