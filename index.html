@@ -58,13 +58,15 @@ body{
 
 /* ===== CONTENIDO ===== */
 .content{
-    margin-left:220px;
+    margin-left:220px;   /* espacio del menú */
     height:100vh;
     display:flex;
-    justify-content:center;
-    align-items:center;
+    flex-direction:column;
+    justify-content:flex-start;  /* texto más arriba */
+    align-items:center;          /* centrado horizontal */
+    padding-top:200px;            /* ajusta qué tan arriba */
     text-align:center;
-    padding:40px;
+    animation:fadeIn 1.5s ease-in-out;
 }
 
 /* SECCIONES */
@@ -146,3 +148,4 @@ function showSection(id){
 
 </body>
 </html>
+
