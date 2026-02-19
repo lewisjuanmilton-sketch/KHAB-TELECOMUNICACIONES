@@ -323,57 +323,25 @@ p{
 </div>
 
 <script>
-function showSection(id){
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(section => section.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-}
-</script>
-
-<a href="https://wa.me/5212206290307?text=Hola%20quiero%20información%20sobre%20KHAB"
-   class="whatsapp-float"
-   target="_blank">
-   💬
-</a>
-
-<script>
-const toggle = document.getElementById("menu-toggle");
-const sidebar = document.querySelector(".sidebar");
-
-toggle.addEventListener("click", () => {
-    sidebar.classList.toggle("active");
-});
-</script>
-
-<!-- BOTÓN CHAT -->
-<div id="chat-toggle">💬</div>
-
-<!-- CHATBOT -->
-<div id="chat-container">
-    <div id="chat-header">
-        KHABSISTENTE 🤖
-        <span id="chat-close">✖</span>
-    </div>
-    <div id="chat-messages"></div>
-    <div id="quick-buttons"></div>
-    <input type="text" id="chat-input" placeholder="Escribe tu mensaje...">
-</div>
-
-<script>
 const chatToggle = document.getElementById("chat-toggle");
 const chatContainer = document.getElementById("chat-container");
 const chatClose = document.getElementById("chat-close");
 const chatInput = document.getElementById("chat-input");
 const chatMessages = document.getElementById("chat-messages");
+const quickButtonsContainer = document.getElementById("quick-buttons");
 
-chatToggle.onclick = () => {
+/* ABRIR CHAT */
+chatToggle.addEventListener("click", () => {
     chatContainer.style.display = "flex";
-};
+    showQuickButtons();
+});
 
-chatClose.onclick = () => {
+/* CERRAR CHAT */
+chatClose.addEventListener("click", () => {
     chatContainer.style.display = "none";
-};
+});
 
+/* AGREGAR MENSAJE */
 function addMessage(text, className){
     const msg = document.createElement("div");
     msg.className = className;
@@ -382,41 +350,7 @@ function addMessage(text, className){
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-function botResponse(text){
-    text = text.toLowerCase();
-
-    if(text.includes("servicio")){
-        return "Ofrecemos soluciones de telecomunicaciones empresariales.";
-    }
-    if(text.includes("precio") || text.includes("costo")){
-        return "Nuestros precios dependen del servicio. Puedes escribirnos por WhatsApp para una cotización.";
-    }
-    if(text.includes("contacto")){
-        return "Puedes contactarnos en la sección CONTACTANOS o por WhatsApp.";
-    }
-    if(text.includes("ubicacion")){
-        return "Operamos en México ofreciendo soluciones tecnológicas.";
-    }
-
-    return "Gracias por tu mensaje. Un asesor de Khab puede ayudarte por WhatsApp.";
-}
-
-chatInput.addEventListener("keypress", function(e){
-    if(e.key === "Enter" && chatInput.value.trim() !== ""){
-        const userText = chatInput.value;
-        addMessage(userText, "user-msg");
-
-        setTimeout(() => {
-            addMessage(botResponse(userText), "bot-msg");
-        }, 500);
-
-        chatInput.value = "";
-    }
-});
-
-<script>
-const quickButtonsContainer = document.getElementById("quick-buttons");
-
+/* BOTONES RÁPIDOS */
 function showQuickButtons(){
     quickButtonsContainer.innerHTML = `
         <button class="quick-btn" onclick="quickReply('servicios')">📡 Servicios</button>
@@ -426,6 +360,7 @@ function showQuickButtons(){
     `;
 }
 
+/* RESPUESTAS RÁPIDAS */
 function quickReply(type){
     let message = "";
 
@@ -445,17 +380,20 @@ function quickReply(type){
     addMessage(message, "bot-msg");
 }
 
-// Mostrar botones al abrir el chat
-chatToggle.onclick = () => {
-    chatContainer.style.display = "flex";
-    showQuickButtons();
-};
-</script>
-    
+/* RESPUESTA ESCRITA */
+chatInput.addEventListener("keypress", function(e){
+    if(e.key === "Enter" && chatInput.value.trim() !== ""){
+        const userText = chatInput.value;
+        addMessage(userText, "user-msg");
+        addMessage("Gracias por tu mensaje. Un asesor puede ayudarte por WhatsApp.", "bot-msg");
+        chatInput.value = "";
+    }
+});
 </script>
     
 </body>
 </html>
+
 
 
 
