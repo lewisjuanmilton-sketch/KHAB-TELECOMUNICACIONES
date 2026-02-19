@@ -163,6 +163,96 @@ p{
         background-size:70%;
     }
 }
+
+/* BOTÓN */
+#chat-toggle{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    width:60px;
+    height:60px;
+    background:#1e3a5f;
+    color:white;
+    border-radius:50%;
+    text-align:center;
+    line-height:60px;
+    font-size:26px;
+    cursor:pointer;
+    box-shadow:0 4px 12px rgba(0,0,0,0.4);
+    z-index:1200;
+    transition:0.3s;
+}
+
+#chat-toggle:hover{
+    transform:scale(1.1);
+}
+
+/* CONTENEDOR */
+#chat-container{
+    position:fixed;
+    bottom:100px;
+    right:25px;
+    width:350px;
+    height:450px;
+    background:white;
+    border-radius:15px;
+    display:none;
+    flex-direction:column;
+    overflow:hidden;
+    box-shadow:0 5px 25px rgba(0,0,0,0.3);
+    z-index:1200;
+}
+
+#chat-header{
+    background:#1e3a5f;
+    color:white;
+    padding:15px;
+    font-weight:bold;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+#chat-close{
+    cursor:pointer;
+}
+
+#chat-messages{
+    flex:1;
+    padding:15px;
+    overflow-y:auto;
+    font-size:14px;
+    color:black;
+}
+
+#chat-input{
+    border:none;
+    border-top:1px solid #ddd;
+    padding:12px;
+    outline:none;
+    font-size:14px;
+}
+
+/* MENSAJES */
+.user-msg{
+    text-align:right;
+    margin-bottom:10px;
+}
+
+.bot-msg{
+    text-align:left;
+    margin-bottom:10px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    #chat-container{
+        width:90%;
+        right:5%;
+        height:70%;
+        bottom:90px;
+    }
+}
     
 </style>
 </head>
@@ -232,9 +322,79 @@ toggle.addEventListener("click", () => {
     sidebar.classList.toggle("active");
 });
 </script>
+
+<!-- BOTÓN CHAT -->
+<div id="chat-toggle">💬</div>
+
+<!-- CHATBOT -->
+<div id="chat-container">
+    <div id="chat-header">
+        Asistente Khab 🤖
+        <span id="chat-close">✖</span>
+    </div>
+    <div id="chat-messages"></div>
+    <input type="text" id="chat-input" placeholder="Escribe tu mensaje...">
+</div>
+
+<script>
+const chatToggle = document.getElementById("chat-toggle");
+const chatContainer = document.getElementById("chat-container");
+const chatClose = document.getElementById("chat-close");
+const chatInput = document.getElementById("chat-input");
+const chatMessages = document.getElementById("chat-messages");
+
+chatToggle.onclick = () => {
+    chatContainer.style.display = "flex";
+};
+
+chatClose.onclick = () => {
+    chatContainer.style.display = "none";
+};
+
+function addMessage(text, className){
+    const msg = document.createElement("div");
+    msg.className = className;
+    msg.innerText = text;
+    chatMessages.appendChild(msg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function botResponse(text){
+    text = text.toLowerCase();
+
+    if(text.includes("servicio")){
+        return "Ofrecemos soluciones de telecomunicaciones empresariales.";
+    }
+    if(text.includes("precio") || text.includes("costo")){
+        return "Nuestros precios dependen del servicio. Puedes escribirnos por WhatsApp para una cotización.";
+    }
+    if(text.includes("contacto")){
+        return "Puedes contactarnos en la sección CONTACTANOS o por WhatsApp.";
+    }
+    if(text.includes("ubicacion")){
+        return "Operamos en México ofreciendo soluciones tecnológicas.";
+    }
+
+    return "Gracias por tu mensaje. Un asesor de Khab puede ayudarte por WhatsApp.";
+}
+
+chatInput.addEventListener("keypress", function(e){
+    if(e.key === "Enter" && chatInput.value.trim() !== ""){
+        const userText = chatInput.value;
+        addMessage(userText, "user-msg");
+
+        setTimeout(() => {
+            addMessage(botResponse(userText), "bot-msg");
+        }, 500);
+
+        chatInput.value = "";
+    }
+});
+</script>
     
 </body>
 </html>
+
 
 
 
