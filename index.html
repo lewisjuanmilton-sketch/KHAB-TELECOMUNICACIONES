@@ -25,20 +25,16 @@ body{
     background-size:50%;
 }
 
-/* ===== MENÚ ===== */
+/* ===== MENÚ LATERAL ===== */
 .sidebar{
     position:fixed;
     left:0;
     top:0;
     height:100%;
     width:220px;
-    background:rgba(0,0,0,0.85);
+    background:rgba(0,0,0,0.9);
     padding-top:40px;
-}
-
-.sidebar h2{
-    text-align:center;
-    margin-bottom:40px;
+    transition:0.3s;
 }
 
 .sidebar a{
@@ -48,7 +44,6 @@ body{
     color:white;
     font-weight:bold;
     transition:0.3s;
-    cursor:pointer;
 }
 
 .sidebar a:hover{
@@ -132,11 +127,50 @@ p{
     background:#1ebe5d;
 }
 
+#menu-toggle{
+    display:none;
+    position:fixed;
+    top:15px;
+    left:15px;
+    font-size:28px;
+    color:white;
+    z-index:1100;
+    cursor:pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px){
+
+    .sidebar{
+        left:-220px;
+    }
+
+    .sidebar.active{
+        left:0;
+    }
+
+    .content{
+        margin-left:0;
+        padding:20px;
+    }
+
+    #menu-toggle{
+        display:block;
+    }
+
+    body{
+        background-position:center center;
+        background-size:70%;
+    }
+}
+    
 </style>
 </head>
 
 <body>
 
+<div id="menu-toggle">☰</div>
+    
 <div class="sidebar">
     <div class="logo-menu">
         <img src="logo.png" alt="Khab Logo">
@@ -190,8 +224,18 @@ function showSection(id){
    💬
 </a>
 
+<script>
+const toggle = document.getElementById("menu-toggle");
+const sidebar = document.querySelector(".sidebar");
+
+toggle.addEventListener("click", () => {
+    sidebar.classList.toggle("active");
+});
+</script>
+    
 </body>
 </html>
+
 
 
 
