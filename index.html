@@ -253,6 +253,28 @@ p{
         bottom:90px;
     }
 }
+
+#quick-buttons{
+    padding:10px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.quick-btn{
+    background:#1e3a5f;
+    color:white;
+    border:none;
+    border-radius:20px;
+    padding:6px 12px;
+    font-size:12px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.quick-btn:hover{
+    background:#2c5282;
+}
     
 </style>
 </head>
@@ -333,6 +355,7 @@ toggle.addEventListener("click", () => {
         <span id="chat-close">✖</span>
     </div>
     <div id="chat-messages"></div>
+    <div id="quick-buttons"></div>
     <input type="text" id="chat-input" placeholder="Escribe tu mensaje...">
 </div>
 
@@ -390,10 +413,50 @@ chatInput.addEventListener("keypress", function(e){
         chatInput.value = "";
     }
 });
+
+<script>
+const quickButtonsContainer = document.getElementById("quick-buttons");
+
+function showQuickButtons(){
+    quickButtonsContainer.innerHTML = `
+        <button class="quick-btn" onclick="quickReply('servicios')">📡 Servicios</button>
+        <button class="quick-btn" onclick="quickReply('precios')">💰 Precios</button>
+        <button class="quick-btn" onclick="quickReply('contacto')">📞 Contacto</button>
+        <button class="quick-btn" onclick="quickReply('ubicacion')">📍 Ubicación</button>
+    `;
+}
+
+function quickReply(type){
+    let message = "";
+
+    if(type === "servicios"){
+        message = "En Khab ofrecemos soluciones de telecomunicaciones empresariales.";
+    }
+    if(type === "precios"){
+        message = "Nuestros precios dependen del servicio. Podemos cotizarte por WhatsApp.";
+    }
+    if(type === "contacto"){
+        message = "Puedes contactarnos desde el botón de WhatsApp en la página.";
+    }
+    if(type === "ubicacion"){
+        message = "Operamos en México ofreciendo soluciones tecnológicas empresariales.";
+    }
+
+    addMessage(message, "bot-msg");
+}
+
+// Mostrar botones al abrir el chat
+chatToggle.onclick = () => {
+    chatContainer.style.display = "flex";
+    showQuickButtons();
+};
+</script>
+    
 </script>
     
 </body>
 </html>
+
 
 
 
