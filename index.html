@@ -322,77 +322,91 @@ p{
 
 </div>
 
+<!-- BOTÓN KHABSISTENTE -->
+<div id="chat-toggle">🤖</div>
+
+<div id="chat-container">
+    <div id="chat-header">
+        KHABSISTENTE 🤖
+        <span id="chat-close">✖</span>
+    </div>
+    <div id="chat-messages"></div>
+    <div id="quick-buttons"></div>
+</div>
+    
 <script>
-const chatToggle = document.getElementById("chat-toggle");
-const chatContainer = document.getElementById("chat-container");
-const chatClose = document.getElementById("chat-close");
-const chatInput = document.getElementById("chat-input");
-const chatMessages = document.getElementById("chat-messages");
-const quickButtonsContainer = document.getElementById("quick-buttons");
+/* ===== CAMBIO DE SECCIONES ===== */
+function showSection(id){
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => section.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
 
-/* ABRIR CHAT */
-chatToggle.addEventListener("click", () => {
-    chatContainer.style.display = "flex";
-    showQuickButtons();
+/* ===== MENÚ RESPONSIVE ===== */
+const toggle = document.getElementById("menu-toggle");
+const sidebar = document.querySelector(".sidebar");
+
+toggle.addEventListener("click", () => {
+    sidebar.classList.toggle("active");
 });
+</script>
+    
+<script>
+document.addEventListener("DOMContentLoaded", function(){
 
-/* CERRAR CHAT */
-chatClose.addEventListener("click", () => {
-    chatContainer.style.display = "none";
-});
+    const chatToggle = document.getElementById("chat-toggle");
+    const chatContainer = document.getElementById("chat-container");
+    const chatClose = document.getElementById("chat-close");
+    const chatMessages = document.getElementById("chat-messages");
+    const quickButtonsContainer = document.getElementById("quick-buttons");
 
-/* AGREGAR MENSAJE */
-function addMessage(text, className){
-    const msg = document.createElement("div");
-    msg.className = className;
-    msg.innerText = text;
-    chatMessages.appendChild(msg);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-}
+    if(!chatToggle) return; // evita que rompa la página
 
-/* BOTONES RÁPIDOS */
-function showQuickButtons(){
-    quickButtonsContainer.innerHTML = `
-        <button class="quick-btn" onclick="quickReply('servicios')">📡 Servicios</button>
-        <button class="quick-btn" onclick="quickReply('precios')">💰 Precios</button>
-        <button class="quick-btn" onclick="quickReply('contacto')">📞 Contacto</button>
-        <button class="quick-btn" onclick="quickReply('ubicacion')">📍 Ubicación</button>
-    `;
-}
+    chatToggle.addEventListener("click", () => {
+        chatContainer.style.display = "flex";
+        showQuickButtons();
+    });
 
-/* RESPUESTAS RÁPIDAS */
-function quickReply(type){
-    let message = "";
+    chatClose.addEventListener("click", () => {
+        chatContainer.style.display = "none";
+    });
 
-    if(type === "servicios"){
-        message = "En Khab ofrecemos soluciones de telecomunicaciones empresariales.";
-    }
-    if(type === "precios"){
-        message = "Nuestros precios dependen del servicio. Podemos cotizarte por WhatsApp.";
-    }
-    if(type === "contacto"){
-        message = "Puedes contactarnos desde el botón de WhatsApp en la página.";
-    }
-    if(type === "ubicacion"){
-        message = "Operamos en México ofreciendo soluciones tecnológicas empresariales.";
+    function addMessage(text){
+        const msg = document.createElement("div");
+        msg.innerText = text;
+        chatMessages.appendChild(msg);
     }
 
-    addMessage(message, "bot-msg");
-}
-
-/* RESPUESTA ESCRITA */
-chatInput.addEventListener("keypress", function(e){
-    if(e.key === "Enter" && chatInput.value.trim() !== ""){
-        const userText = chatInput.value;
-        addMessage(userText, "user-msg");
-        addMessage("Gracias por tu mensaje. Un asesor puede ayudarte por WhatsApp.", "bot-msg");
-        chatInput.value = "";
+    function showQuickButtons(){
+        quickButtonsContainer.innerHTML = `
+            <button onclick="quickReply('servicios')">Servicios</button>
+            <button onclick="quickReply('precios')">Precios</button>
+            <button onclick="quickReply('contacto')">Contacto</button>
+        `;
     }
+
+    window.quickReply = function(type){
+        let message = "";
+
+        if(type === "servicios"){
+            message = "Ofrecemos telecomunicaciones empresariales.";
+        }
+        if(type === "precios"){
+            message = "Podemos enviarte una cotización por WhatsApp.";
+        }
+        if(type === "contacto"){
+            message = "Puedes usar nuestro botón de WhatsApp.";
+        }
+
+        addMessage(message);
+    };
+
 });
 </script>
     
 </body>
 </html>
+
 
 
 
