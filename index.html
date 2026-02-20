@@ -276,7 +276,77 @@ p{
 .quick-btn:hover{
     background:#2c5282;
 }
-    
+
+/* ===== ABOUT PROFESIONAL ===== */
+
+.about-container{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:40px;
+    max-width:1100px;
+    width:100%;
+}
+
+.about-text{
+    flex:1;
+    text-align:left;
+}
+
+.about-text h1{
+    color:#1e3a5f;
+    font-size:36px;
+    margin-bottom:20px;
+}
+
+.about-text p{
+    font-size:17px;
+    line-height:1.8;
+    color:#444;
+}
+
+.about-cards{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(0,0,0,0.15);
+}
+
+.card h3{
+    color:#1e3a5f;
+    margin-bottom:10px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px){
+
+    .about-container{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .about-text{
+        text-align:center;
+    }
+
+    .about-cards{
+        width:100%;
+    }
+}
+	
 </style>
 </head>
 
@@ -304,19 +374,41 @@ p{
     </div>
 
     <div id="conocenos" class="section">
-        <h1>Conócenos</h1>
-        <p>
-            KHAB TELECOMUNICACIONES S.A. DE C.V.
-Somos una empresa dedicada a la distribución de productos de telecomunicaciones y al desarrollo de estrategias de publicidad digital, brindando soluciones que conectan a las personas y potencian el crecimiento de tu negocio.
 
-Ofrecemos:
-	•	Distribución confiable de equipos y servicios de telecomunicaciones.
-	•	Campañas de marketing digital innovadoras y enfocadas en resultados.
-	•	Asesoría personalizada para fortalecer tu presencia en el mercado.
+    <div class="about-container">
 
-Con KHAB TELECOMUNICACIONES tu marca llega más lejos y tus clientes siempre estarán conectados.
-        </p>
+        <div class="about-text">
+            <h1>Conócenos</h1>
+            <p>
+                KHAB TELECOMUNICACIONES S.A. DE C.V. es una empresa enfocada en soluciones
+                tecnológicas y telecomunicaciones empresariales.
+                Conectamos personas, negocios y oportunidades mediante innovación y estrategia digital.
+            </p>
+        </div>
+
+        <div class="about-cards">
+
+            <div class="card">
+                <h3>🎯 Misión</h3>
+                <p>
+                    Brindar soluciones de telecomunicaciones confiables,
+                    impulsando el crecimiento tecnológico de nuestros clientes.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🚀 Visión</h3>
+                <p>
+                    Ser una empresa líder en innovación tecnológica,
+                    reconocida por nuestra calidad y compromiso.
+                </p>
+            </div>
+
+        </div>
+
     </div>
+
+</div>
 
     <div id="contacto" class="section">
         <h1>Contáctanos</h1>
@@ -413,6 +505,7 @@ document.addEventListener("DOMContentLoaded", function(){
     
 </body>
 </html>
+
 
 
 
