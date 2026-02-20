@@ -143,27 +143,37 @@ p{
 @media (max-width: 768px){
 
     .sidebar{
-        left:-220px;
+        left:-100%;
+        width:100%;
+        background:black;
+        z-index:2000;
     }
 
     .sidebar.active{
         left:0;
     }
 
+    .sidebar a{
+        font-size:20px;
+        text-align:center;
+        padding:20px;
+    }
+
     .content{
-    margin-left:0;
-    padding:20px;
-    padding-top:40px;
-}
+        margin-left:0;
+        padding:20px;
+    }
 
     #menu-toggle{
         display:block;
+        color:black;
+        z-index:2100;
     }
 
     body{
-    background-position:center 60%;
-    background-size:80%;
-}
+        background-position:center;
+        background-size:70%;
+    }
 }
 
 /* BOTÓN */
@@ -506,6 +516,7 @@ document.addEventListener("DOMContentLoaded", function(){
     
 </body>
 </html>
+
 
 
 
